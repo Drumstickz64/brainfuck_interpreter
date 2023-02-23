@@ -1,14 +1,25 @@
 use std::io;
 
-#[derive(Debug)]
-pub struct BfInterpreter {
+/// An interpreter for Brainfuck
+///
+/// ## Example
+/// ```
+/// use brainfuck_interpreter::BrainfuckInterpreter;
+///
+/// let program = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+/// let cell_array_size = 30_000;
+/// let bfi = BrainfuckInterpreter::new(program, cell_array_size);
+/// bfi.run();
+/// ```
+#[derive(Debug, Clone)]
+pub struct BrainfuckInterpreter {
     cells: Vec<Cell>,
     instructions: Vec<Instruction>,
     cell_ptr: CellPos,
     instruction_ptr: CellPos,
 }
 
-impl BfInterpreter {
+impl BrainfuckInterpreter {
     pub fn new(program: &str, cell_array_size: usize) -> Self {
         Self {
             cells: vec![0; cell_array_size],
